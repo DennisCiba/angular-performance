@@ -1,0 +1,8 @@
+<div class="border p-2">
+  <h3>MouseTrackerComponent</h3>
+  <div (mousemove)="onMouseMove($event)" class="h-40 flex justify-center items-center text-center bg-orange-50 m-4">
+    {{ scrolls }} x gescrollt.<br/>
+    Position: {{ posX }}, {{ posY }}
+  </div>
+  <div class="text-right">Change Detection Cycles: {{ changeCycles }}</div>
+</div>

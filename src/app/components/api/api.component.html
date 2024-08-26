@@ -1,0 +1,11 @@
+<div class="border p-2">
+  <h3>ApiComponent</h3>
+  <div class="w-full h-20 flex justify-center gap-4 items-center">
+    <button mat-stroked-button (click)="requestRandomNumber()">GET</button>
+    @if (!isError) {
+      <span class="text-lg font-bold">{{ response }}</span>
+    } @else {
+      <span class="text-red">Fehler!</span>
+    }
+  </div>
+</div>

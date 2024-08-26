@@ -1,0 +1,11 @@
+<div class="border p-2">
+  <h3>ListComponent</h3>
+  <div class="w-full h-40 overflow-y-scroll">
+    <ul>
+      <li *ngFor="let item of items" class="list-disc">
+        <strong>{{ item.name }}</strong
+        >, <em>{{ item.race }}</em> ({{ item.gender }})
+      </li>
+    </ul>
+  </div>
+</div>
