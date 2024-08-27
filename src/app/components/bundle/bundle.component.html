@@ -1,15 +1,3 @@
-<div class="h-screen">
-  @if (isBrowser) {
-    <apx-chart
-      [series]="series"
-      [chart]="chart"
-      [xaxis]="xaxis"
-      [title]="title"></apx-chart>
-  }
-</div>
+<app-chart />
 
-<div class="h-screen">
-  <ngx-extended-pdf-viewer
-    src="alice.pdf"
-    height="auto"></ngx-extended-pdf-viewer>
-</div>
+<app-pdf />
