@@ -1,17 +1,12 @@
-import { Component } from '@angular/core';
-import { PrimePipe } from '../../pipes/prime.pipe';
+import { Pipe, PipeTransform } from '@angular/core';
 
-@Component({
-  selector: 'app-expensive',
+@Pipe({
+  name: 'prime',
   standalone: true,
-  templateUrl: './expensive.component.html',
-  imports: [PrimePipe],
 })
-export class ExpensiveComponent {
-  readonly limit = 5_000_000;
-
-  prime(): number {
-    const sieve = new Array(this.limit);
+export class PrimePipe implements PipeTransform {
+  transform(value: number): number {
+    const sieve = new Array(value);
     for (let i = 0; i < sieve.length; i++) {
       sieve[i] = true;
     }
