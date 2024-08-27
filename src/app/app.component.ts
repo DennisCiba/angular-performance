@@ -4,6 +4,7 @@ import { MousetrackerComponent } from './components/mousetracker/mousetracker.co
 import { ExpensiveComponent } from './components/expensive/expensive.component';
 import { CdCounterComponent } from './components/cdcounter/cdcounter.component';
 import { ApiComponent } from './components/api/api.component';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,9 @@ import { ApiComponent } from './components/api/api.component';
     ExpensiveComponent,
     CdCounterComponent,
     ApiComponent,
+    RouterOutlet,
+    RouterLink,
+    RouterLinkActive,
   ],
   templateUrl: './app.component.html',
 })

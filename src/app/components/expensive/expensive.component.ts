@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
-import { PrimePipe } from '../../pipes/prime.pipe';
 
 @Component({
   selector: 'app-expensive',
   standalone: true,
   templateUrl: './expensive.component.html',
-  imports: [PrimePipe],
 })
 export class ExpensiveComponent {
   readonly limit = 5_000_000;
@@ -29,7 +27,6 @@ export class ExpensiveComponent {
       biggestPrime = i;
     }
 
-    console.count('Prime Recomputes');
     return biggestPrime;
   }
 }

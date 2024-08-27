@@ -1,7 +1,11 @@
+<nav class="flex gap-4 m-4">
+  <a routerLink="/change-detection" routerLinkActive="font-bold text-blue-500"
+    >Change Detection</a
+  >
+  <a routerLink="/bundle" routerLinkActive="font-bold text-blue-500"
+    >Bundling</a
+  >
+</nav>
 <main class="m-8 flex flex-col gap-4">
-  <app-mousetracker />
-  <app-expensive />
-  <app-cdcounter />
-  <app-list />
-  <app-api />
+  <router-outlet />
 </main>
