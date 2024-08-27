@@ -10,29 +10,24 @@ import { ApexChart, NgApexchartsModule } from 'ng-apexcharts';
 export class ChartComponent {
   readonly series = [
     {
-      name: 'My-series',
-      data: [10, 41, 35, 51, 49, 62, 69, 91, 148, 172, 212, 331],
+      name: 'npm',
+      data: [1.66, 8.99, 42.06],
+    },
+    {
+      name: 'pnpm',
+      data: [4.07, 6.6, 18.84],
+    },
+    {
+      name: 'bun',
+      data: [7.24, 0.12, 0.18],
     },
   ];
   readonly chart: ApexChart = {
     height: 350,
     type: 'bar',
   };
-  readonly title = { text: 'App Performance' };
+  readonly title = { text: 'Package Menager Installationszeiten' };
   readonly xaxis = {
-    categories: [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'May',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec',
-    ],
+    categories: ['Ohne Lockfile', 'Ohne node_modules', 'Ohne beides'],
   };
 }

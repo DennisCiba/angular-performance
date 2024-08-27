@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-expensive',
@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   templateUrl: './expensive.component.html',
 })
 export class ExpensiveComponent {
-  readonly limit = 5_000_000;
+  @Input({ required: true }) limit!: number;
 
   prime(): number {
     const sieve = new Array(this.limit);
