@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
 import { RandomService } from '../../services/random.service';
@@ -14,7 +8,6 @@ import { RandomService } from '../../services/random.service';
   standalone: true,
   templateUrl: './api.component.html',
   imports: [MatButtonModule],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ApiComponent implements OnInit, OnDestroy {
   public response = 0;
