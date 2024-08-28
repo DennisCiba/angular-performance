@@ -1,8 +1,16 @@
-<div class="h-screen flex flex-col justify-center">
+<div class="min-h-screen flex flex-col justify-center gap-16">
   <h2>apexchart</h2>
   <apx-chart
-    [series]="series"
-    [chart]="chart"
-    [xaxis]="xaxis"
-    [title]="title"></apx-chart>
+    [series]="pmSeries"
+    [chart]="pmChart"
+    [xaxis]="pmXaxis"
+    [title]="pmTitle"></apx-chart>
+  <apx-chart
+    [series]="cpSeries"
+    [chart]="cpChart"
+    [dataLabels]="cpLabels"
+    [plotOptions]="cpOptions"
+    [xaxis]="cpXaxis"
+    [title]="cpTitle"
+    [legend]="cpLegend"></apx-chart>
 </div>

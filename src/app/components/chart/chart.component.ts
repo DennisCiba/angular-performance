@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component } from '@angular/core';
 import { ApexChart, NgApexchartsModule } from 'ng-apexcharts';
 
@@ -8,7 +9,7 @@ import { ApexChart, NgApexchartsModule } from 'ng-apexcharts';
   templateUrl: './chart.component.html',
 })
 export class ChartComponent {
-  readonly series = [
+  readonly pmSeries = [
     {
       name: 'npm',
       data: [1.66, 8.99, 42.06],
@@ -22,12 +23,46 @@ export class ChartComponent {
       data: [7.24, 0.12, 0.18],
     },
   ];
-  readonly chart: ApexChart = {
+  readonly pmChart: ApexChart = {
     height: 350,
     type: 'bar',
   };
-  readonly title = { text: 'Package Menager Installationszeiten' };
-  readonly xaxis = {
+  readonly pmTitle = { text: 'Package Menager Installationszeiten' };
+  readonly pmXaxis = {
     categories: ['Ohne Lockfile', 'Ohne node_modules', 'Ohne beides'],
+  };
+
+  readonly cpSeries = [{ name: '', data: [2.25, 1.01, 0.83] }];
+  readonly cpChart: ApexChart = {
+    height: 350,
+    type: 'bar',
+  };
+  readonly cpOptions = {
+    bar: {
+      borderRadius: 0,
+      horizontal: true,
+      distributed: true,
+      barHeight: '80%',
+      isFunnel: true,
+    },
+  };
+  readonly cpLabels = {
+    enabled: true,
+    formatter: function (_: any, opt: any) {
+      return opt.w.globals.labels[opt.dataPointIndex];
+    },
+    dropShadow: {
+      enabled: true,
+    },
+  };
+  readonly cpTitle = {
+    text: 'Bundlegrößen',
+    align: 'center' as const,
+  };
+  readonly cpLegend = {
+    show: false,
+  };
+  readonly cpXaxis = {
+    categories: ['Unkomprimiert', 'Gzip', 'Brotli'],
   };
 }
