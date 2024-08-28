@@ -1,5 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, inject, OnDestroy } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnDestroy,
+} from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -8,9 +13,11 @@ import { MatButtonModule } from '@angular/material/button';
   standalone: true,
   templateUrl: './api.component.html',
   imports: [MatButtonModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ApiComponent implements OnDestroy {
   public response = 0;
+  public valuesReceived = 0;
   public isError = false;
 
   private readonly httpClient = inject(HttpClient);
@@ -25,6 +32,7 @@ export class ApiComponent implements OnDestroy {
       .subscribe({
         next: value => {
           this.response = value;
+          this.valuesReceived++;
         },
         error: () => {
           this.isError = true;
