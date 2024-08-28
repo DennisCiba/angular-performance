@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-expensive',
+  selector: 'app-prime',
   standalone: true,
-  templateUrl: './expensive.component.html',
+  templateUrl: './prime.component.html',
 })
-export class ExpensiveComponent {
+export class PrimeComponent {
   @Input({ required: true }) limit!: number;
 
   prime(): number {

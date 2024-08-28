@@ -22,6 +22,6 @@ export class MousetrackerComponent implements DoCheck {
   }
 
   ngDoCheck(): void {
-      this.changeCycles++;
+    this.changeCycles++;
   }
 }
