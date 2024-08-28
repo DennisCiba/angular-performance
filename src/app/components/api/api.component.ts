@@ -1,12 +1,13 @@
-import { HttpClient } from '@angular/common/http';
 import {
   ChangeDetectionStrategy,
   Component,
   inject,
   OnDestroy,
+  OnInit,
 } from '@angular/core';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
+import { RandomService } from '../../services/random.service';
 
 @Component({
   selector: 'app-api',
@@ -15,29 +16,22 @@ import { MatButtonModule } from '@angular/material/button';
   imports: [MatButtonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ApiComponent implements OnDestroy {
+export class ApiComponent implements OnInit, OnDestroy {
   public response = 0;
   public valuesReceived = 0;
-  public isError = false;
 
-  private readonly httpClient = inject(HttpClient);
+  private readonly randomService = inject(RandomService);
   private readonly unsubscribe = new Subject<void>();
 
   requestRandomNumber(): void {
-    this.httpClient
-      .get<number>(
-        'https://dtahecywprj7wm3gdp5alhk5g40zrxqv.lambda-url.eu-central-1.on.aws/'
-      )
-      .pipe(takeUntil(this.unsubscribe))
-      .subscribe({
-        next: value => {
-          this.response = value;
-          this.valuesReceived++;
-        },
-        error: () => {
-          this.isError = true;
-        },
-      });
+    this.randomService.requestNewNumber();
+  }
+
+  ngOnInit(): void {
+    this.randomService.number$.subscribe(value => {
+      this.response = value;
+      this.valuesReceived++;
+    });
   }
 
   ngOnDestroy(): void {

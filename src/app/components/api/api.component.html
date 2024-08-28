@@ -2,12 +2,8 @@
   <h3>ApiComponent</h3>
   <div class="w-full h-20 flex justify-center gap-4 items-center">
     <button mat-stroked-button (click)="requestRandomNumber()">GET</button>
-    @if (!isError) {
-      <div class="text-lg text-center">
-        Nummer #{{ valuesReceived }}: <strong>{{ response }}</strong>
-      </div>
-    } @else {
-      <span class="text-red">Fehler!</span>
-    }
+    <div class="text-lg text-center">
+      Nummer #{{ valuesReceived - 1 }}: <strong>{{ response }}</strong>
+    </div>
   </div>
 </div>
