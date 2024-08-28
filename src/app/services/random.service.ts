@@ -6,7 +6,8 @@ import { BehaviorSubject, take } from 'rxjs';
   providedIn: 'root',
 })
 export class RandomService {
-  public number$ = new BehaviorSubject<number>(0);
+  private readonly _number$ = new BehaviorSubject(0);
+  public readonly number$ = this._number$.asObservable();
 
   private readonly httpClient = inject(HttpClient);
 
@@ -18,7 +19,7 @@ export class RandomService {
       .pipe(take(1))
       .subscribe({
         next: value => {
-          this.number$.next(value);
+          this._number$.next(value);
         },
       });
   }

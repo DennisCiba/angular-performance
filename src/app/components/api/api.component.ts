@@ -5,7 +5,7 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
 import { RandomService } from '../../services/random.service';
 
@@ -18,7 +18,6 @@ import { RandomService } from '../../services/random.service';
 })
 export class ApiComponent implements OnInit, OnDestroy {
   public response = 0;
-  public valuesReceived = 0;
 
   private readonly randomService = inject(RandomService);
   private readonly unsubscribe = new Subject<void>();
@@ -28,10 +27,11 @@ export class ApiComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.randomService.number$.subscribe(value => {
-      this.response = value;
-      this.valuesReceived++;
-    });
+    this.randomService.number$
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe(value => {
+        this.response = value;
+      });
   }
 
   ngOnDestroy(): void {
