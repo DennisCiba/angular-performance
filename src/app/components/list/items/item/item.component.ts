@@ -12,7 +12,5 @@ import { MatIconModule } from '@angular/material/icon';
 export class ItemComponent implements OnInit {
   @Input({ required: true }) item!: Character;
 
-  ngOnInit(): void {
-    console.count('ItemComponent init');
-  }
+  ngOnInit(): void {}
 }
