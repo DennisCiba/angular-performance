@@ -10,7 +10,7 @@ import { RandomService } from '../../services/random.service';
   imports: [MatButtonModule],
 })
 export class ApiComponent implements OnInit, OnDestroy {
-  public response = 0;
+  public number = 0;
 
   private readonly randomService = inject(RandomService);
   private readonly unsubscribe = new Subject<void>();
@@ -23,7 +23,7 @@ export class ApiComponent implements OnInit, OnDestroy {
     this.randomService.number$
       .pipe(takeUntil(this.unsubscribe))
       .subscribe(value => {
-        this.response = value;
+        this.number = value;
       });
   }
 

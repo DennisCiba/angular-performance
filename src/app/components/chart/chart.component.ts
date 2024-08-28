@@ -27,7 +27,7 @@ export class ChartComponent {
     height: 350,
     type: 'bar',
   };
-  readonly pmTitle = { text: 'Package Menager Installationszeiten' };
+  readonly pmTitle = { text: 'Package Manager Installationszeiten' };
   readonly pmXaxis = {
     categories: ['Ohne Lockfile', 'Ohne node_modules', 'Ohne beides'],
   };
