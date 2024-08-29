@@ -6,6 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "build:prod": "ng build --configuration production --source-map",
+    "serve:prod": "lite-server --baseDir=\"dist/angular-performance/browser\"",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:angular-performance": "node dist/angular-performance/server/server.mjs",
