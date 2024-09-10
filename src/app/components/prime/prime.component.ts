@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 
 @Component({
   selector: 'app-prime',
@@ -6,10 +6,10 @@ import { Component, Input } from '@angular/core';
   templateUrl: './prime.component.html',
 })
 export class PrimeComponent {
-  @Input({ required: true }) limit!: number;
+  public limit = input.required<number>();
 
-  prime(): number {
-    const sieve = new Array(this.limit);
+  prime = computed(() => {
+    const sieve = new Array(this.limit());
     for (let i = 0; i < sieve.length; i++) {
       sieve[i] = true;
     }
@@ -26,7 +26,7 @@ export class PrimeComponent {
 
       biggestPrime = i;
     }
-
+    console.count('prime');
     return biggestPrime;
-  }
+  });
 }

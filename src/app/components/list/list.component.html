@@ -4,8 +4,8 @@
     <button mat-stroked-button (click)="add()">Hinzufügen</button>
 
     <div class="grid grid-cols-2 gap-4 mt-4">
-      <app-items [items]="items"></app-items>
-      <app-last-item [lastAdded]="lastAdded"></app-last-item>
+      <app-items [items]="items()"></app-items>
+      <app-last-item [lastAdded]="lastAdded()"></app-last-item>
     </div>
   </div>
 </div>

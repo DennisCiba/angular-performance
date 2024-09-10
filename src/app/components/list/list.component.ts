@@ -1,5 +1,5 @@
 import { NgForOf } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, computed, effect, Injector, signal } from '@angular/core';
 import { MatListModule } from '@angular/material/list';
 import { randString } from '../../utils/utils';
 import { MatButtonModule } from '@angular/material/button';
@@ -27,23 +27,32 @@ export interface Character {
   ],
 })
 export class ListComponent {
-  items = generateList();
-  lastAdded: Character = { ...this.items[0] };
+  loggingEffect(): void {
+    effect(
+      () => {
+        console.log(`The count is: ${this.items().length}`);
+        localStorage.setItem('list', JSON.stringify(this.items()));
+      },
+      { injector: this.injector }
+    );
+  }
+
+  constructor(private injector: Injector) {
+    this.loggingEffect();
+  }
+
+  items = signal<Character[]>(localStorage.getItem('list') ? JSON.parse(localStorage.getItem('list')!) ?? [] : generateList());
+  lastAdded = computed(() => this.items()[0]);
 
   add() {
     const newCharacter = {
-      id: this.items.length + 1,
+      id: this.items().length + 1,
       name: randString(),
       gender: ['m', 'f', '?'][Math.floor(Math.random() * 3)],
       race: ['Hobbit', 'Man', 'Elf', 'Orc', 'Maia', 'Valar'][
         Math.floor(Math.random() * 6)
       ],
     };
-    this.items.unshift(newCharacter);
-
-    this.lastAdded.id = newCharacter.id;
-    this.lastAdded.race = newCharacter.race;
-    this.lastAdded.name = newCharacter.name;
-    this.lastAdded.gender = newCharacter.gender;
+    this.items.update(items => [newCharacter, ...items]);
   }
 }

@@ -1,6 +1,7 @@
 <div class="flex flex-col gap-8 m-8 p-4">
   <app-mousetracker />
-  <app-prime [limit]="5_000_000" />
+  <button mat-stroked-button (click)="increaseLimit()">Erhöhe Limit</button>
+  <app-prime [limit]="limit()" />
   <app-cdcounter />
   <app-list />
   <app-api />

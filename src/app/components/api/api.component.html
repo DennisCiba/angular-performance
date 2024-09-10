@@ -1,9 +1,25 @@
-<div class="border p-2">
+<div class="border p-2 flex-col justify-center items-center">
   <h3>ApiComponent</h3>
-  <div class="w-full h-20 flex justify-center gap-4 items-center">
-    <button mat-stroked-button (click)="requestRandomNumber()">GET</button>
-    <div class="text-lg text-center">
-      <strong>{{ number }}</strong>
+  <section class="flex row">
+    <div class="w-full h-20 flex justify-center gap-4 items-center">
+      <button mat-stroked-button (click)="increaseNumber()">increase manual</button>
+      <div class="text-lg text-center">
+        <strong>{{ number() }}</strong>
+      </div>
     </div>
+    <div class="w-full h-20 flex justify-center gap-4 items-center">
+      <button mat-stroked-button (click)="requestRandomNumber()">random number</button>
+      <div class="text-lg text-center">
+        <strong>{{ number$ | async }}</strong>
+      </div>
+    </div>
+  </section>
+  <div class="w-full h-20 flex justify-center items-center">
+    <div class="text-lg text-center">
+      <strong> Character of source {{ currentCharacter().name }}</strong>
+    </div>
+  </div>
+  <div class="w-full h-20 flex justify-center gap-4 items-center">
+    <button mat-stroked-button class="justify-center mx-auto" (click)="toggleSource()">toggleSource</button>
   </div>
 </div>
