@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { map, Observable, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 
 export interface People {
   name: string;
@@ -15,6 +15,6 @@ export class StarWarsService {
   private readonly httpClient = inject(HttpClient);
 
   requestPeopleById(id: string): Observable<People> {
-    return this.httpClient.get<People>('https://swapi.dev/api/people/' + id)
+    return this.httpClient.get<People>('https://swapi.dev/api/people/' + id);
   }
 }

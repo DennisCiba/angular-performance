@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { RandomService } from '../../services/random.service';
 import { People, StarWarsService } from '../../services/starwars.service';
