@@ -1,9 +1,9 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, Signal, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { RandomService } from '../../services/random.service';
 import { People, StarWarsService } from '../../services/starwars.service';
 import { AsyncPipe } from '@angular/common';
-import { pipe, switchMap, tap } from 'rxjs';
+import { Observable, pipe, switchMap, tap } from 'rxjs';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 
 @Component({
@@ -16,7 +16,8 @@ export class ApiComponent {
   private readonly randomService = inject(RandomService);
   private starwarsService = inject(StarWarsService);
   public number = signal(1); // manual
-  public number$ = this.randomService.number$; // api response
+  public number$: Observable<number> = this.randomService.number$; // api response
+  private source: Signal<number> | Observable<number> = (this.number$);
 
   public currentCharacter = signal<People>({
     name: '',
@@ -24,7 +25,9 @@ export class ApiComponent {
     species: '',
   });
 
-  constructor() {}
+  constructor() {
+    this.loadCharacter(this.source);
+  }
 
   requestRandomNumber(): void {
     this.randomService.requestNewNumber();
@@ -35,10 +38,13 @@ export class ApiComponent {
   }
 
   toggleSource(): void {
+    this.source = this.source === this.number ? this.number$ : this.number;
+    this.loadCharacter(this.source);
   }
 
-  loadCharacter = rxMethod<number | undefined>(
+  loadCharacter = rxMethod<number>(
     pipe(
+      tap((source) => console.log('source', source)),
       switchMap(id =>
         id === 0
           ? this.starwarsService.requestPeopleById('1')
