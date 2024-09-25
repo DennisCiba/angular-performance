@@ -22,14 +22,13 @@ export class ApiComponent {
   public number$: Observable<number> = this.randomService.number$; // api response
 
   public currentCharacter = signal<People>({
-    name: '',
-    gender: '',
+    name: 'Theo',
+    gender: 'male',
     species: '',
   });
 
   constructor() {
-    this.loadCharacter(this.number$);
-    this.loadCharacter(this.number);
+
   }
 
   requestRandomNumber(): void {
@@ -46,7 +45,7 @@ export class ApiComponent {
       switchMap(id =>
         id === 0 || id > 80
           ? this.starwarsService.requestPeopleById('1')
-          : this.starwarsService.requestPeopleById(id?.toString() ?? '1')
+          : this.starwarsService.requestPeopleById(id.toString() ?? '1')
       ),
       tap(result => this.currentCharacter.set(result))
     )

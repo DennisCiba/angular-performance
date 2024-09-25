@@ -16,7 +16,6 @@ interface starwarsViewModel {
   name: string;
   id: string;
   currentCharacter: People;
-  signalSource: boolean;
 }
 
 const initialStarwarsViewModel: starwarsViewModel = {
@@ -27,14 +26,13 @@ const initialStarwarsViewModel: starwarsViewModel = {
     gender: '',
     species: '',
   },
-  signalSource: true,
 }
 
 export const starwarsStore = signalStore(
   withEntities<starwarsViewModel>(),
   withState(initialStarwarsViewModel),
-  withComputed((store, service = inject(RandomService)) => ({
-    source: computed(() => (store.signalSource() ? store.id : service.number$)),
+  withComputed((store) => ({
+    genderLabel: computed(() => store.currentCharacter.gender() === 'n/a' ? 'unbekannt' : store.currentCharacter.gender()),
   })),
   withMethods(
     (
