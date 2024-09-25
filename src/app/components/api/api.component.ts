@@ -20,7 +20,6 @@ export class ApiComponent {
   private readonly starWarsStore = inject(starwarsStore);
   public number = signal(1); // manual
   public number$: Observable<number> = this.randomService.number$; // api response
-  private source: Signal<number> | Observable<number> = (this.number$);
 
   public currentCharacter = signal<People>({
     name: '',
