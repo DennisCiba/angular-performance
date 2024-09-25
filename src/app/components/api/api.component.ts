@@ -5,16 +5,19 @@ import { People, StarWarsService } from '../../services/starwars.service';
 import { AsyncPipe } from '@angular/common';
 import { Observable, pipe, switchMap, tap } from 'rxjs';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
+import { starwarsStore } from './api.store';
 
 @Component({
   selector: 'app-api',
   standalone: true,
   templateUrl: './api.component.html',
   imports: [MatButtonModule, AsyncPipe],
+  providers: [starwarsStore],
 })
 export class ApiComponent {
   private readonly randomService = inject(RandomService);
   private starwarsService = inject(StarWarsService);
+  private readonly starWarsStore = inject(starwarsStore);
   public number = signal(1); // manual
   public number$: Observable<number> = this.randomService.number$; // api response
   private source: Signal<number> | Observable<number> = (this.number$);
@@ -26,7 +29,8 @@ export class ApiComponent {
   });
 
   constructor() {
-    this.loadCharacter(this.source);
+    this.loadCharacter(this.number$);
+    this.loadCharacter(this.number);
   }
 
   requestRandomNumber(): void {
@@ -37,16 +41,11 @@ export class ApiComponent {
     this.number.update(n => n + 1);
   }
 
-  toggleSource(): void {
-    this.source = this.source === this.number ? this.number$ : this.number;
-    this.loadCharacter(this.source);
-  }
-
   loadCharacter = rxMethod<number>(
     pipe(
       tap((source) => console.log('source', source)),
       switchMap(id =>
-        id === 0
+        id === 0 || id > 80
           ? this.starwarsService.requestPeopleById('1')
           : this.starwarsService.requestPeopleById(id?.toString() ?? '1')
       ),
