@@ -42,7 +42,7 @@ export class ListComponent {
   }
 
   items = signal<Character[]>(localStorage.getItem('list') ? JSON.parse(localStorage.getItem('list')!) ?? [] : generateList());
-  lastAdded = computed(() => this.items()[this.items().length - 1]);
+  lastAdded = computed(() => this.items()[0]);
 
   add() {
     const newCharacter = {
@@ -53,6 +53,6 @@ export class ListComponent {
         Math.floor(Math.random() * 6)
       ],
     };
-    this.items.update(items => [...items, newCharacter]);
+    this.items.update(items => [newCharacter, ...items]);
   }
 }

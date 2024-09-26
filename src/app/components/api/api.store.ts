@@ -14,13 +14,15 @@ import { People, StarWarsService } from '../../services/starwars.service';
 
 interface starwarsViewModel {
   id: string;
+  loading: boolean;
   currentCharacter: People;
 }
 
 const initialStarwarsViewModel: starwarsViewModel = {
   id: '',
+  loading: false,
   currentCharacter: {
-    name: '',
+    name: 'Theo',
     gender: '',
     species: '',
   },
