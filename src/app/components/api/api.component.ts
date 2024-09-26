@@ -5,19 +5,17 @@ import { People, StarWarsService } from '../../services/starwars.service';
 import { AsyncPipe } from '@angular/common';
 import { Observable, pipe, switchMap, tap } from 'rxjs';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { starwarsStore } from './api.store';
 
 @Component({
   selector: 'app-api',
   standalone: true,
   templateUrl: './api.component.html',
   imports: [MatButtonModule, AsyncPipe],
-  providers: [starwarsStore],
+  providers: [],
 })
 export class ApiComponent {
   private readonly randomService = inject(RandomService);
   private starwarsService = inject(StarWarsService);
-  private readonly starWarsStore = inject(starwarsStore);
   public number = signal(1); // manual
   public number$: Observable<number> = this.randomService.number$; // api response
 
