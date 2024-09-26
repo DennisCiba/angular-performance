@@ -13,13 +13,11 @@ import { pipe, switchMap, tap } from 'rxjs';
 import { People, StarWarsService } from '../../services/starwars.service';
 
 interface starwarsViewModel {
-  name: string;
   id: string;
   currentCharacter: People;
 }
 
 const initialStarwarsViewModel: starwarsViewModel = {
-  name: '',
   id: '',
   currentCharacter: {
     name: '',
